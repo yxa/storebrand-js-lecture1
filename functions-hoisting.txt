@@ -1,0 +1,94 @@
+// Variables are initialised to undefined when created.
+
+var foo = 1;
+function bar() {
+  if (!foo) {
+    var foo = 10;
+  }
+  console.log(foo);
+}
+bar(); //what gets printed
+
+
+var x = 1;
+console.log(x); //1
+if (true) {
+  var x = 2;
+  console.log(x); // 2
+}
+console.log(x); // 2
+
+
+var x = 1;
+console.log(x);
+if (true) {
+  var x = 2;
+  console.log(x);
+}
+console.log(x);
+
+
+//This is because JavaScript has function-level scope.
+//This is radically different from the C family. Blocks, such as if statements, do not create a new scope. Only functions create a new scope.
+
+
+//Function declarations and variable declarations are always moved "hoisted" invisibly to the top of their containing scope by the JavaScript interpreter.
+//Function parameters and language-defined names are, obviously, already there. This means that code like this:
+
+function foo() {
+  bar();
+  var x = 1;
+}
+
+//is actually interpreted like this:
+
+function foo() {
+  var x;
+  bar();
+  x = 1;
+}
+
+
+//Name Resolution Order
+
+foo(); // TypeError "foo is not a function"
+bar(); // valid
+baz(); // TypeError "baz is not a function"
+spam(); // ReferenceError "spam is not defined"
+
+var foo = function () {}; // anonymous function expression ('foo' gets hoisted)
+function bar() {}; // function declaration ('bar' and the function body get hoisted)
+var baz = function spam() {}; // named function expression (only 'baz' gets hoisted)
+
+foo(); // valid
+bar(); // valid
+baz(); // valid
+spam(); // ReferenceError "spam is not defined"
+
+
+//And function declaration takes precedence over variable declarations
+var a = 1;
+function b() {
+  a = 10;
+  return;
+  function a() {}
+}
+b();
+alert(a);
+
+
+
+
+
+// global vars
+
+function showAge () {
+  // Age is a global variable because it was not declared with the var keyword inside this function
+  age = 90;
+  console.log(age);//
+}
+
+showAge (); // 90
+
+// Age is in the global context, so it is available here, too
+console.log(age); // 90
