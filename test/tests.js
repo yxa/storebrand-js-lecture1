@@ -1,12 +1,6 @@
 //http://underscorejs.org/
 //http://visionmedia.github.io/mocha/
 
-//use whatever assert style you like
-//http://chaijs.com/
-var assert = chai.assert,
-    expect = chai.expect,
-    should = chai.should();
-
 
 //JSHint Directives, You could but these as comments in your files or have a more project specific .jshintignore file
 //http://jslinterrors.com/
@@ -16,6 +10,13 @@ var assert = chai.assert,
 
 //ignore dot notation
 /*jshint -W069 */
+
+
+// http://chaijs.com/
+var assert = chai.assert,
+    expect = chai.expect,
+    should = chai.should();
+
 
 describe('Language Basics', function() {
 
@@ -38,6 +39,48 @@ describe('Language Basics', function() {
   });
 
 
+  //All other values are truthy, including "0" (zero in quotes), "false" (false in quotes), empty functions, empty arrays, and empty objects.
+  describe('Falsy Values',function(){
+    it("Name all falsy values", function () {
+        // Use each value only once ;)
+        assert(!REPLACE_ME);
+        assert(!REPLACE_ME);
+        assert(!REPLACE_ME);
+        assert(!REPLACE_ME);
+        assert(!REPLACE_ME);
+        assert(!REPLACE_ME);
+    });
+  });
+
+
+  it('Demonstrates Pass By X', function(done) {
+    var myFunction = function(x) {
+        x = 5;
+    };
+
+    var x = 4;
+    myFunction(x);
+    assert(x === REPLACE_ME);
+    done();
+  });
+
+
+  it('Demonstrates Pass By X', function(done) {
+      var myObj = { age: 31};
+
+      var myFunction = function fooBar(obj) {
+          obj.age += 1;
+          return "foobar";
+      };
+
+      myFunction(myObj);
+      assert(myObj.age === REPLACE_ME);
+      done();
+  });
+
+
+
+
   it('should contain the right array members', function(done) {
     var result = [ ];
 
@@ -47,26 +90,9 @@ describe('Language Basics', function() {
             * Named Function Expression
     */
 
-
-    var f1 = function(array) {
-      for(var i = 0; i < 3; i++) {
-        array.push(i);
-      }
-    };
-
-    var f2 = function f2(array) {
-      for(var i = 3; i < 6; i++) {
-        array.push(i);
-      }
-    };
-
-    function f3(array) {
-      for(var i = 6; i < 9; i++) array.push(i);
-    };
-
-    f1(result);
+    f1();
     f2(result);
-    f3(result);
+    f3();
 
     expect(f1).to.have.property('name');
     expect(f1.name).to.equal('');
@@ -81,18 +107,19 @@ describe('Language Basics', function() {
   });
 });
 
-describe('Callback Functions', function() {
+describe('Callback Functions', function(done) {
   it('should be called with a object and a callback/higher-order function',function(done) {
 
     var f1 = function( myObj, callback ) {
       assert.isObject(myObj);
       assert.isNumber(myObj.age);
-      assert.isNumber(myObj["ssn"]);
+      assert.isString(myObj["social-security-number"]);
       assert.isFunction(callback);
       done();
     };
 
-    f1({age: 44, ssn: 23434}, function(){});
+    f1();
+    done();
   });
 });
 
