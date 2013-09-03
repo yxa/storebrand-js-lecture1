@@ -1,0 +1,4 @@
+functions are first-class objects, which means functions can be used in a first-class manner like objects,
+since they are in fact objects themselves:
+
+They can be “stored in variables, passed as arguments to functions, created within functions, and returned from functions” [1].
