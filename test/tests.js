@@ -21,7 +21,6 @@ var assert = chai.assert,
 describe('Language Basics', function() {
 
   describe('Short-Circuiting Expressions',function(){
-
     it('AND short circuit', function () {
         var lang = { name: "JavaScript" };
         var version = lang && lang.name && lang.version;
@@ -35,9 +34,7 @@ describe('Language Basics', function() {
 
         assert(version == REPLACE_ME);
     });
-
   });
-
 
   //All other values are truthy, including "0" (zero in quotes), "false" (false in quotes), empty functions, empty arrays, and empty objects.
   describe('Falsy Values',function(){
@@ -123,8 +120,52 @@ describe('Callback Functions', function(done) {
   });
 });
 
-describe('Function Hoisting', function() {
+describe('Namspaces', function() {
+  it("should create a proper namespace", function(done) {
+
+    function namespace(namespaceString) {
+      var parts = namespaceString.split('.'),
+          parent = window,
+          currentPart = '';    
+      
+      //TODO
+      return parent;
+    }
+
+    namespace("storebrand.penjson.kalkulator");
+    expect(window).to.have.deep.property("storebrand.penjson.kalkulator").that.is.an('object');
+    done();
+  })
 });
 
-describe('Closures', function() {
+
+describe('Function Hoisting', function() {
+  it("should assert the right value according to the Hoisting", function(done) {
+     var myvar = 'my value';
+
+    (function() {
+      assert(myvar === "REPLACE_ME")
+      var myvar = 'local value';
+    })();
+
+    done();
+  });
+});
+
+describe('Module Pattern', function() {
+  it("should be a proper module", function(done) {
+  
+    var Counter = (function() {
+      //TODO  
+    })();
+
+    Counter.increment();
+    Counter.increment();
+    expect(Counter.value()).to.equal(2)
+    Counter.decrement();
+    expect(Counter.value()).to.equal(1)
+
+    done();
+  });
+
 });
